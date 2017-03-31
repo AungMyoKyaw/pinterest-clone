@@ -11,11 +11,11 @@ passport.use(new twitterStrategy(config.twitter,(token,tokenSecret,profile,cb)=>
         cb(null,user);
       } else {
         let newUser = new User({
-          username:profile.displayName,
+          displayName:profile.displayName,
           img:profile.photos[0].value,
           twitter:{
             id:profile.id,
-            name:profile.username
+            userName:profile.username
           }
         });
         return newUser.save();

@@ -70,7 +70,7 @@ app.use(express.static(__dirname+'/dist'));
 //special API List
 const specialRouteList = glob.sync('./server/route/special/*.js');
 specialRouteList.forEach(specialRouteList=>{
-  app.use('/api',require(specialRouteList));
+  app.use('/special/api',require(specialRouteList));
 })
 
 //authentication middleware

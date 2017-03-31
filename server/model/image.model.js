@@ -2,14 +2,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const imageSchema = new Schema({
-  description:String,
+  description:{
+    type:String,
+    trim:true
+  },
   url:{
     type:String,
     required:true
   },
   like:{
     type:Number,
-    default:0
+    default:0,
+    min:0
   },
   date:{
     type:Date,

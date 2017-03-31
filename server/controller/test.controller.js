@@ -3,3 +3,13 @@ function test(req,res){
 }
 
 module.exports = test;
+
+// {
+//   "_id": "",
+//   "username": "",
+//   "img": "",
+//   "twitter": {
+//     "id": "",
+//     "name": ""
+//   }
+// }
