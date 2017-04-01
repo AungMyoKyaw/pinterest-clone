@@ -42,10 +42,61 @@ function editImage(req,res){
     })
 }
 
+function searchImage(req,res){
+  let offset = req.query.offset || 0;
+  let limit = req.query.limit || 22;
+  let keyword =new RegExp(req.query.keyword,'i');
+  let userId = req.user._id;
+  Image.find({description:keyword})
+    .limit(Number(limit))
+    .skip(Number(offset))
+    .populate('userId',{'twitter.userName':1,img:1,_id:0})
+    .sort('-like -date')
+    .lean()
+    .then(images=>{
+      Promise.all(images.map(image=>{
+        return liked(image,userId)
+      }))
+      .then(resData=>{
+        res.json(resData);
+      })
+      .catch(err=>{
+        throw err;
+      })
+    })
+    .catch(err=>{
+      res.status(500).json({message:err.message});
+    })
+}
+
+function liked(image,userID){
+  return new Promise((resolve,reject)=>{
+    Like.findOne({
+      userId:userID,
+      imageId:image._id
+    })
+    .select('like')
+    .sort('-_id')
+    .then(like=>{
+      if(like!==null && like.like){
+        image.liked = true;
+        resolve(image);
+      } else {
+        image.liked = false;
+        resolve(image);
+      }
+    })
+    .catch(err=>{
+      reject(err);
+    });
+  })
+}
+
 module.exports = {
   postImage,
   editImage,
-  deleteImage
+  deleteImage,
+  searchImage
 }
 
 //postImage
