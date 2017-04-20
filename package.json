@@ -33,6 +33,7 @@
     "express": "^4.15.2",
     "express-session": "^1.15.1",
     "glob": "^7.1.1",
+    "hammerjs": "^2.0.8",
     "mongoose": "^4.8.6",
     "passport": "^0.3.2",
     "passport-twitter": "^1.0.4",

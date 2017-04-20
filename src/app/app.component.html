@@ -1,14 +1,14 @@
 <md-toolbar color="warn">
-  <span>{{title}}</span>
+  <a href="/" class="title">{{title}}</a>
   <span class="fill-space"></span>
-  <button md-button>Login</button>
-  <button md-icon-button>
+  <a href="/auth/twitter" md-button *ngIf="!auth">Login</a>
+  <button md-icon-button *ngIf="auth">
     <md-icon>search</md-icon>
   </button>
-  <button md-icon-button>
+  <button md-icon-button *ngIf="auth">
     <md-icon>perm_identity</md-icon>
   </button>
-  <button md-icon-button>
+  <button md-icon-button *ngIf="auth" (click)="logout()">
     <md-icon>power_settings_new</md-icon>
   </button>
 </md-toolbar>
