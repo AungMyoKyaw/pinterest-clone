@@ -5,7 +5,8 @@ import { HttpModule } from '@angular/http';
 
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MasonryModule } from 'angular2-masonry';
 
 import { AppComponent } from './app.component';
 
@@ -18,7 +19,8 @@ import { AppComponent } from './app.component';
     FormsModule,
     HttpModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MasonryModule
   ],
   providers: [],
   bootstrap: [AppComponent]

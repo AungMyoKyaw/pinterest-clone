@@ -1,4 +1,4 @@
-<md-toolbar color="warn">
+<md-toolbar color="warn" style="position: fixed;z-index: 2">
   <a href="/" class="title">{{title}}</a>
   <span class="fill-space"></span>
   <a href="/auth/twitter" md-button *ngIf="!auth">Login</a>
@@ -12,3 +12,23 @@
     <md-icon>power_settings_new</md-icon>
   </button>
 </md-toolbar>
+<md-card style="top:64px">
+  <masonry [useImagesLoaded]="true" [options]="myoptions" class="center">
+    <masonry-brick class="brick" *ngFor="let story of topStories">
+      <img src="{{story.url}}" alt="story.description" style="width: 100%">
+      <div class="label">
+        {{story.description}}
+      </div>
+      <md-progress-bar mode="indeterminate" *ngIf="story.loading" color="warn"></md-progress-bar>
+      <div class="action">
+        <img src="{{story.userId.img}}" alt="{{story.userId.twitter.userName}}" class="user">
+        <button md-icon-button class="like" [ngClass]="{liked:story.liked}" (click)="like(story)">
+          <md-icon>thumb_up</md-icon>
+        </button>
+      </div>
+    </masonry-brick>
+  </masonry>
+</md-card>
+<div class="loading" *ngIf="loading">
+  <md-spinner color="warn" class="spinner"></md-spinner>
+</div>

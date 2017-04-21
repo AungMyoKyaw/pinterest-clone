@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http,Headers,RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -12,8 +12,17 @@ export class AppService {
 
   constructor(private http:Http) { }
 
+  headers = new Headers({'Content-Type': 'application/json'});
+  options = new RequestOptions({headers:this.headers});
+
   newFeed():Observable<any>{
     return this.http.get(`${environment.apiUrl}special/api/new-feed`)
+      .map(res=>res.json())
+      .catch((err:any)=>Observable.throw(err.json().message || 'Server Error'))
+  }
+
+  like(body):Observable<any>{
+    return this.http.post(`${environment.apiUrl}api/like`,body,this.options)
       .map(res=>res.json())
       .catch((err:any)=>Observable.throw(err.json().message || 'Server Error'))
   }
