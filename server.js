@@ -7,6 +7,7 @@ const compression = require('compression');
 const passport = require('passport');
 const glob = require('glob');
 const path = require('path');
+const morgan = require('morgan');
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use(compression());
 app.use(bodyParser.json());
 app.use(cookieParser(sessionConfig.secret));
 app.use(session(sessionConfig));
+app.use(morgan('dev'));
 
 //passport middleware
 app.use(passport.initialize());
