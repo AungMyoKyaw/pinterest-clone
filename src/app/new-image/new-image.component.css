@@ -14,3 +14,8 @@ p{
   display: block;
   width: 100%;
 }
+
+.login{
+  width:13em;
+  margin: 0 auto;
+}

@@ -13,6 +13,7 @@ export class NewImageComponent implements OnInit {
   imgDes:string;
   isImgOk:boolean;
   loading:boolean;
+  isAuth:boolean;
 
   constructor(
     public dialogRef:MdDialogRef<NewImageComponent>,

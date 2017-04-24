@@ -49,6 +49,7 @@ export class AppComponent {
     this.dialogRef = this.dialog.open(NewImageComponent,{
       width:'80%'
     });
+    this.dialogRef.componentInstance.isAuth = this.auth;
     this.dialogRef.afterClosed().subscribe(result=>{
       if(result !== undefined){
         this.router.navigateByUrl('/amk',{skipLocationChange:true})

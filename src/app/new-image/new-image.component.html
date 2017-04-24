@@ -1,4 +1,4 @@
-<h3 md-dialog-title>New Image</h3>
+<h3 md-dialog-title *ngIf="isAuth">New Image</h3>
 <md-dialog-content>
   <img [src]="imageUrl" [alt]="imgDes" style="width: 100%">
   <md-input-container class="myInput">
@@ -11,5 +11,6 @@
 <md-progress-bar mode="indeterminate" *ngIf="loading" color="warn"></md-progress-bar>
 <md-dialog-actions>
   <button md-dialog-close md-fab class="close">x</button>
-  <button md-raised-button (click)="newImage(link.value,des.value)">Post</button>
+  <button md-raised-button (click)="newImage(link.value,des.value)" *ngIf="isAuth">Post</button>
+  <a href="/auth/twitter" md-raised-button *ngIf="!isAuth" color="warn" class="login">Login Now!</a>
 </md-dialog-actions>
