@@ -21,6 +21,12 @@ export class AppService {
       .catch((err:any)=>Observable.throw(err.json().message || 'Server Error'))
   }
 
+  userProfile(userName):Observable<any>{
+    return this.http.get(`${environment.apiUrl}special/api/profile/${userName}`)
+      .map(res=>res.json())
+      .catch((err:any)=>Observable.throw(err.json().message || 'Server Error'))
+  }
+
   like(body):Observable<any>{
     return this.http.post(`${environment.apiUrl}api/like`,body,this.options)
       .map(res=>res.json())
@@ -29,7 +35,7 @@ export class AppService {
 
   isAuth():Observable<any>{
     return this.http.get(`${environment.apiUrl}special/api/isauth`)
-      .map(res=>true)
+      .map(res=>res.json())
       .catch((err:any)=>Observable.throw(err.json().message || 'Server Error'));
   }
 
