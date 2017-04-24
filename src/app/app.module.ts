@@ -12,6 +12,7 @@ import { MasonryModule } from 'angular2-masonry';
 import { AppComponent } from './app.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HomeComponent } from './home/home.component';
+import { NewImageComponent } from './new-image/new-image.component';
 
 const appRoutes:Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
@@ -23,7 +24,8 @@ const appRoutes:Routes = [
   declarations: [
     AppComponent,
     UserProfileComponent,
-    HomeComponent
+    HomeComponent,
+    NewImageComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,7 @@ const appRoutes:Routes = [
     MasonryModule,
     RouterModule.forRoot(appRoutes)
   ],
+  entryComponents:[NewImageComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

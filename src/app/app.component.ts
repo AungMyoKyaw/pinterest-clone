@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { AppService } from './app.service';
+import { MdDialog,MdDialogRef } from '@angular/material';
+import { Router } from '@angular/router';
+import { NewImageComponent } from './new-image/new-image.component'
 
 @Component({
   selector: 'app-root',
@@ -14,8 +17,13 @@ export class AppComponent {
   auth = false;
   errMessage = '';
   userName:string;
+  dialogRef:MdDialogRef<NewImageComponent>;
 
-  constructor(private app:AppService){}
+  constructor(
+    private app:AppService,
+    private router:Router,
+    public dialog:MdDialog
+  ){}
 
   isAuth(){
     this.app.isAuth()
@@ -35,6 +43,20 @@ export class AppComponent {
       },err=>{
         this.auth = true;
       })
+  }
+
+  addNewImage(){
+    this.dialogRef = this.dialog.open(NewImageComponent,{
+      width:'80%'
+    });
+    this.dialogRef.afterClosed().subscribe(result=>{
+      if(result !== undefined){
+        this.router.navigateByUrl('/amk',{skipLocationChange:true})
+        .then(()=>{
+          this.router.navigateByUrl('home')
+        })
+      }
+    })
   }
 
   ngOnInit(){

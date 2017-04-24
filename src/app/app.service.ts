@@ -33,6 +33,12 @@ export class AppService {
       .catch((err:any)=>Observable.throw(err.json().message || 'Server Error'))
   }
 
+  newImage(body):Observable<any>{
+    return this.http.post(`${environment.apiUrl}api/image`,body,this.options)
+      .map(res=>res.json())
+      .catch((err:any)=>Observable.throw(err.json().message || 'Server Error'))
+  }
+
   isAuth():Observable<any>{
     return this.http.get(`${environment.apiUrl}special/api/isauth`)
       .map(res=>res.json())
@@ -42,6 +48,12 @@ export class AppService {
   logout():Observable<any>{
     return this.http.get(`${environment.apiUrl}logout`)
       .map(res=>true)
+      .catch((err:any)=>Observable.throw(err.json().message || 'Server Error'));
+  }
+
+  isImgBroken(imgUrl):Observable<any>{
+    return this.http.get(imgUrl)
+      .map(res=>false)
       .catch((err:any)=>Observable.throw(err.json().message || 'Server Error'));
   }
 }

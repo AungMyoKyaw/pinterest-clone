@@ -1,0 +1,15 @@
+<h3 md-dialog-title>New Image</h3>
+<md-dialog-content>
+  <img [src]="imageUrl" [alt]="imgDes" style="width: 100%">
+  <md-input-container class="myInput">
+    <input type="url" mdInput placeholder="Your Image Link" style="width:100%" #link (change)="onchangeHandler(link.value)" required="true">
+  </md-input-container>
+  <md-input-container class="myInput">
+    <input type="url" mdInput placeholder="Description" #des style="width:100%">
+  </md-input-container>
+</md-dialog-content>
+<md-progress-bar mode="indeterminate" *ngIf="loading" color="warn"></md-progress-bar>
+<md-dialog-actions>
+  <button md-dialog-close md-fab class="close">x</button>
+  <button md-raised-button (click)="newImage(link.value,des.value)">Post</button>
+</md-dialog-actions>

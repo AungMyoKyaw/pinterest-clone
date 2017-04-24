@@ -7,7 +7,7 @@
       </div>
       <md-progress-bar mode="indeterminate" *ngIf="story.loading" color="warn"></md-progress-bar>
       <div class="action">
-        <img src="{{story.userId.img}}" alt="{{story.userId.twitter.userName}}" class="user">
+        <img src="{{story.userId.img}}" alt="{{story.userId.twitter.userName}}" class="user" (click)="userProfile(story.userId.twitter.userName)">
         <button md-icon-button class="like" [ngClass]="{liked:story.liked}" (click)="like(story)">
           <md-icon>thumb_up</md-icon>
         </button>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
+import { Router } from '@angular/router';
 import { MasonryOptions } from 'angular2-masonry';
 
 @Component({
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
     fitWidth:true
   }
 
-  constructor(private app:AppService) { }
+  constructor(private app:AppService,private router:Router) { }
 
   newFeed(){
     this.app.newFeed()
@@ -42,6 +43,10 @@ export class HomeComponent implements OnInit {
         this.topStories[curIndex].loading = false;
         this.errMessage = err.message;
       })
+  }
+
+  userProfile(userName){
+    this.router.navigate([userName]);
   }
 
   ngOnInit() {

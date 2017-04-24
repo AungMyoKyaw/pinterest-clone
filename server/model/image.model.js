@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const http = require('http');
+
 const imageSchema = new Schema({
   description:{
     type:String,
@@ -23,7 +25,29 @@ const imageSchema = new Schema({
     type:Schema.Types.ObjectId,
     ref:'User',
     required:true
+  },
+  broken:{
+    type:Boolean,
+    default:false
   }
+})
+
+imageSchema.pre('save',function(next){
+  let isUrl = /^http:\/\//.test(this.url);
+  let url = isUrl ? this.url : 'http://AungMyoKyaw';
+  http.get(url,res=>{
+    const { statusCode } = res;
+    if(statusCode == '200'){
+      next();
+    } else {
+      this.url = "http://placehold.it/350x100?text=Broken+image!";
+      next();
+    }
+  }).on('error',e=>{
+    this.url = "http://placehold.it/350x100?text=Broken+image!";
+    this.broken = true;
+    next();
+  })
 })
 
 module.exports = mongoose.model('Image',imageSchema);
