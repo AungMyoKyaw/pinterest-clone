@@ -36,7 +36,7 @@ const imageSchema = new Schema({
 imageSchema.pre('save',function(next){
   let isUrl = /^http:\/\//.test(this.url);
   let isUrls = /^https:\/\//.test(this.url);
-  let url = isUrl ? this.url : 'http://AungMyoKyaw';
+  let url = isUrl || isUrls ? this.url : 'http://AungMyoKyaw';
   if(isUrls){
     https.get(url,res=>{
       if(res.statusCode == '200'){
