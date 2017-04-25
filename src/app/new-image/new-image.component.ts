@@ -21,8 +21,9 @@ export class NewImageComponent implements OnInit {
   ) { }
 
   onchangeHandler(imgUrl){
-    let isUrl = /^http?s:\/\//.test(imgUrl);
+    let isUrl = /^https?:\/\//.test(imgUrl);
     let url = isUrl ? imgUrl : 'http://localhost';
+    console.log('amk');
     this.app.isImgBroken(imgUrl)
       .subscribe(res=>{
         this.imageUrl = isUrl ? imgUrl : "http://placehold.it/350x100?text=Your+image+link+is+broken!";
