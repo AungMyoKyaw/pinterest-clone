@@ -60,6 +60,6 @@ export class AppService {
   isImgBroken(imgUrl):Observable<any>{
     return this.http.get(imgUrl)
       .map(res=>false)
-      .catch((err:any)=>Observable.throw(err.json().message || 'Server Error'));
+      .catch((err:any)=>Observable.throw(err.json() || 'Server Error'));
   }
 }

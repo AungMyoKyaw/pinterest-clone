@@ -23,7 +23,7 @@ function likeImage(req,res){
     })
     .then(like=>{
       resData.like = like;
-      return Image.findById(like.imageId).select('like');
+      return Image.findById(like.imageId);
     })
     .then(image=>{//like plus
       like.like ? image.like++ : image.like--;
