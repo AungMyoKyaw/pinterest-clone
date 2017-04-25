@@ -36,9 +36,9 @@ const imageSchema = new Schema({
 imageSchema.pre('save',function(next){
   let isUrl = /^http:\/\//.test(this.url);
   let isUrls = /^https:\/\//.test(this.url);
-  let url = isUrl || isUrls ? this.url : 'http://AungMyoKyaw';
+  this.url = isUrl || isUrls ? this.url : 'http://placehold.it/350x100?text=Broken+image!';
   if(isUrls){
-    https.get(url,res=>{
+    https.get(this.url,res=>{
       if(res.statusCode == '200'){
         next();
       } else {
@@ -51,7 +51,7 @@ imageSchema.pre('save',function(next){
       next();
     })
   } else if(isUrl){
-    http.get(url,res=>{
+    http.get(this.url,res=>{
       const { statusCode } = res;
       if(statusCode == '200'){
         next();
@@ -64,6 +64,8 @@ imageSchema.pre('save',function(next){
       this.broken = true;
       next();
     })
+  } else {
+    next();
   }
 })
 
