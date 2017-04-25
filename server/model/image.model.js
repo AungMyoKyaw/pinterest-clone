@@ -39,8 +39,7 @@ imageSchema.pre('save',function(next){
   let url = isUrl ? this.url : 'http://AungMyoKyaw';
   if(isUrls){
     https.get(url,res=>{
-      const { statusCode } = res;
-      if(statusCode == '200'){
+      if(res.statusCode == '200'){
         next();
       } else {
         this.url = "http://placehold.it/350x100?text=Broken+image!";
