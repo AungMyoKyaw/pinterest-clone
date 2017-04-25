@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   errMessage = '';
   topStories = [];
   loading = true;
+  noImage:boolean;
   public myoptions:MasonryOptions = {
     gutter:10,
     fitWidth:true
@@ -24,7 +25,8 @@ export class HomeComponent implements OnInit {
     this.app.newFeed()
       .subscribe(result=>{
         this.topStories = result;
-        this.loading = false
+        this.loading = false;
+        this.noImage = result.length == 0;
       },err=>{
         this.errMessage = err.message;
       })

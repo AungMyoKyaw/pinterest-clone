@@ -15,6 +15,9 @@
     </masonry-brick>
   </masonry>
 </md-card>
+<div class="noImage" *ngIf="noImage">
+  No image found.
+</div>
 <div class="loading" *ngIf="loading">
   <md-spinner color="warn" class="spinner"></md-spinner>
 </div>

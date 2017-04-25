@@ -16,6 +16,7 @@ export class UserProfileComponent implements OnInit,OnDestroy {
   loading = true;
   errMessage = '';
   showRemove:boolean = false;
+  noImage:boolean;
   public myoptions:MasonryOptions = {
     gutter:10,
     fitWidth:true
@@ -31,7 +32,8 @@ export class UserProfileComponent implements OnInit,OnDestroy {
     this.app.userProfile(userName)
       .subscribe(result=>{
         this.topStories = result;
-        this.loading = false
+        this.loading = false;
+        this.noImage = result.length == 0;
       },err=>{
         this.errMessage = err.message;
         this.router.navigate(['profile/404']);
