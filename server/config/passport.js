@@ -8,7 +8,7 @@ passport.use(new twitterStrategy(config.twitter,(token,tokenSecret,profile,cb)=>
   User.findOne({'twitter.id':profile.id})
     .then(user=>{
       if(user!==null){
-        cb(null,user);
+        return user;
       } else {
         let newUser = new User({
           displayName:profile.displayName,
@@ -21,7 +21,7 @@ passport.use(new twitterStrategy(config.twitter,(token,tokenSecret,profile,cb)=>
         return newUser.save();
       }
     })
-    .then((user)=>{
+    .then(user=>{
       cb(null,user);
     })
     .catch(err=>{
