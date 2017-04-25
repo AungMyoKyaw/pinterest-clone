@@ -52,7 +52,7 @@ export class AppComponent {
     this.dialogRef.componentInstance.isAuth = this.auth;
     this.dialogRef.afterClosed().subscribe(result=>{
       if(result !== undefined){
-        this.router.navigateByUrl('/amk',{skipLocationChange:true})
+        this.router.navigateByUrl('/profile/404',{skipLocationChange:true})
         .then(()=>{
           this.router.navigateByUrl('home')
         })
