@@ -27,7 +27,7 @@ export class NewImageComponent implements OnInit {
       .subscribe(res=>{
         this.imageUrl = isUrl ? imgUrl : "http://placehold.it/350x100?text=Your+image+link+is+broken!";
       },err=>{
-        this.imageUrl = "http://placehold.it/350x100?text=Your+image+link+is+broken!";
+        this.imageUrl = isUrl ? imgUrl : "http://placehold.it/350x100?text=Your+image+link+is+broken!";
       })
   }
 
