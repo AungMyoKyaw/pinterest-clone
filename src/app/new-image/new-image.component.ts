@@ -22,12 +22,12 @@ export class NewImageComponent implements OnInit {
 
   onchangeHandler(imgUrl){
     let isUrl = /^https?:\/\//.test(imgUrl);
-    let url = isUrl ? imgUrl : 'http://localhost';
-    this.app.isImgBroken(imgUrl)
+    let url = isUrl ? imgUrl : 'http://AungMyoKyaw';
+    this.app.isImgBroken(url)
       .subscribe(res=>{
         this.imageUrl = isUrl ? imgUrl : "http://placehold.it/350x100?text=Your+image+link+is+broken!";
       },err=>{
-        this.imageUrl = "http://placehold.it/350x100?text=Your+image+link+is+broken!";
+        this.imageUrl = isUrl ? imgUrl : "http://placehold.it/350x100?text=Your+image+link+is+broken!";
       })
   }
 
