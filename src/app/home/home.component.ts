@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
       .subscribe(result=>{
         this.topStories = result;
         this.loading = false
-        console.log(this.topStories);
       },err=>{
         this.errMessage = err.message;
       })

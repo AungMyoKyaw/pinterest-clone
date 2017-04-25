@@ -2,9 +2,9 @@
   <a routerLink="/home" class="title">{{title}}</a>
   <span class="fill-space"></span>
   <a href="/auth/twitter" md-button *ngIf="!auth">Login</a>
-  <button md-icon-button *ngIf="auth">
+  <!-- <button md-icon-button *ngIf="auth">
     <md-icon>search</md-icon>
-  </button>
+  </button> -->
   <a [routerLink]="['',userName]" routerLinkActive="active" md-icon-button *ngIf="auth">
     <md-icon>perm_identity</md-icon>
   </a>

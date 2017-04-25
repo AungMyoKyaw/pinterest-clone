@@ -13,11 +13,13 @@ import { AppComponent } from './app.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HomeComponent } from './home/home.component';
 import { NewImageComponent } from './new-image/new-image.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes:Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'home',component:HomeComponent},
-  {path:':username',component:UserProfileComponent}
+  {path:':username',component:UserProfileComponent},
+  {path:'profile/404',component:NotFoundComponent}
 ]
 
 @NgModule({
@@ -25,7 +27,8 @@ const appRoutes:Routes = [
     AppComponent,
     UserProfileComponent,
     HomeComponent,
-    NewImageComponent
+    NewImageComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@
           <md-icon>thumb_up</md-icon>
         </button>
       </div>
+      <button class="delete" (click)="delImage(story)" md-fab color="warn" *ngIf="showRemove">X</button>
     </masonry-brick>
   </masonry>
 </md-card>

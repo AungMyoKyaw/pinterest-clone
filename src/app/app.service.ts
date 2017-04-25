@@ -39,6 +39,12 @@ export class AppService {
       .catch((err:any)=>Observable.throw(err.json().message || 'Server Error'))
   }
 
+  delImage(imageId):Observable<any>{
+    return this.http.delete(`${environment.apiUrl}api/image/${imageId}`,this.options)
+      .map(res=>res.json())
+      .catch((err:any)=>Observable.throw(err.json().message || 'Server Error'))
+  }
+
   isAuth():Observable<any>{
     return this.http.get(`${environment.apiUrl}special/api/isauth`)
       .map(res=>res.json())

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { AppService } from '../app.service';
 import { MasonryOptions } from 'angular2-masonry';
 
@@ -15,21 +15,26 @@ export class UserProfileComponent implements OnInit,OnDestroy {
   topStories = [];
   loading = true;
   errMessage = '';
+  showRemove:boolean = false;
   public myoptions:MasonryOptions = {
     gutter:10,
     fitWidth:true
   }
 
-  constructor(private route:ActivatedRoute,private app:AppService) { }
+  constructor(
+    private route:ActivatedRoute,
+    private app:AppService,
+    private router:Router
+  ) { }
 
   newFeed(userName){
     this.app.userProfile(userName)
       .subscribe(result=>{
         this.topStories = result;
         this.loading = false
-        console.log(this.topStories);
       },err=>{
         this.errMessage = err.message;
+        this.router.navigate(['profile/404']);
       })
   }
 
@@ -38,7 +43,6 @@ export class UserProfileComponent implements OnInit,OnDestroy {
     this.topStories[curIndex].loading = true;
     this.app.like({imageId:story._id})
       .subscribe(result=>{
-        console.log(result);
         this.topStories[curIndex].liked = !story.liked;
         this.topStories[curIndex].loading = false;
       },err=>{
@@ -47,9 +51,30 @@ export class UserProfileComponent implements OnInit,OnDestroy {
       })
   }
 
+  delImage(story){
+    let curIndex = this.topStories.indexOf(story);
+    this.topStories[curIndex].loading = true;
+    this.app.delImage(story._id)
+      .subscribe(retult=>{
+        this.topStories[curIndex].loading = false;
+        this.topStories.splice(curIndex,1);
+      },err=>{
+        this.topStories[curIndex].loading = false;
+        this.errMessage = err.message;
+      })
+  }
+
+  isAuth(){
+    this.app.isAuth()
+      .subscribe(result=>{
+        this.showRemove = result.username == this.username;
+      })
+  }
+
   ngOnInit() {
     this.sub = this.route.params.subscribe(params=>{
-      console.log(params.username);
+      this.username = params.username;
+      this.isAuth();
       this.newFeed(params.username);
     })
   }

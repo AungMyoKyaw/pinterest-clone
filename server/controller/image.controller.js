@@ -16,13 +16,21 @@ function postImage(req,res){
 
 function deleteImage(req,res){
   let imageId = req.params.imageId;
-  Image.findByIdAndRemove(imageId)
+  let userId = req.user._id;
+  Image.findById(imageId)
+    .then(image=>{
+      if(image.userId+''==userId){
+        return image.remove();
+      } else {
+        throw Error('WTF');
+      }
+    })
     .then(removed=>{
       res.json({message:'Successfully removed.'});
     })
     .catch(err=>{
       res.status(500).json({message:err.message});
-    })
+    });
 }
 
 function editImage(req,res){

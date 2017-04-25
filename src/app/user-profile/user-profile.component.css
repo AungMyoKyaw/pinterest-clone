@@ -68,3 +68,16 @@
   transform: translate(-50%,-50%);
   width: 4em;
 }
+
+.delete{
+  width: 2.2em;
+  height: 2.2em;
+  position: absolute;
+  top:-1em;
+  right:-1em;
+  opacity: .4;
+}
+
+.delete:hover{
+  opacity: .8;
+}
