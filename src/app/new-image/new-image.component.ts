@@ -21,7 +21,7 @@ export class NewImageComponent implements OnInit {
   ) { }
 
   onchangeHandler(imgUrl){
-    let isUrl = /^http:\/\//.test(imgUrl);
+    let isUrl = /^http?s:\/\//.test(imgUrl);
     let url = isUrl ? imgUrl : 'http://localhost';
     this.app.isImgBroken(imgUrl)
       .subscribe(res=>{
